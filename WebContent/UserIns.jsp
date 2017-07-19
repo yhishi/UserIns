@@ -11,40 +11,38 @@
   </head>
   <body>
 
-    <!-- 最初のローディング表示 -->
-    <!--
-    <section id="loading" class="view">
-      <span class="initial-loading-icon glyphicon glyphicon-refresh" aria-hidden="true"></span>
-    </section>-->
+    <!-- 検索パネル 各種ボタン -->
+    <br>
+	<section id="search-panel">
+		<div class="container">
+			<div class="col-sm-6 panel panel-default">
+				<label for="login-email" class="col-sm-3 control-label">メールアドレス</label>
+				<div class="col-sm-5">
+					<input type="email" class="form-control" id="login-email" required>
+				</div>
+				<button type="button" class="btn btn-primary">検索</button>
+			</div>
+			<div class="col-sm-offset-1 col-sm-1">
+				<button type="submit" class="btn btn-primary login__submit-button">新規</button>
+			</div>
+			<div class="col-sm-1">
+				<button type="submit" class="btn btn-primary login__submit-button">更新</button>
+			</div>
+			<div class="col-sm-1">
+				<button type="submit" class="btn btn-primary login__submit-button">削除</button>
+			</div>
+		</div>
+	</section>
+	<!-- /#search-panel -->
+	<br>
+	<section id="meisai">
+		<div class="container">
+			<table class="table table-striped">
 
-    <!-- ログイン画面 -->
-    <section id="login" class="view">
-      <div class="container">
-        <form id="login-form" class="form-horizontal">
-          <div class="form-group login__email">
-            <label for="login-email" class="col-sm-3 control-label">メールアドレス</label>
-            <div class="col-sm-9">
-              <input type="email" class="form-control" id="login-email" required>
-            </div>
-          </div>
-          <div class="form-group login__password">
-            <label for="login-password" class="col-sm-3 control-label">パスワード</label>
-            <div class="col-sm-9">
-              <input type="password" class="form-control" id="login-password" required>
-              <p class="help-block">初めての方は、登録するパスワードを入力してください</p>
-            </div>
-          </div>
+			</table>
+		</div>
+	</section>
 
-          <div class="col-sm-offset-3 col-sm-9 alert alert-danger login__help"></div>
-          <div class="form-group login__submit">
-            <div class="col-sm-offset-3 col-sm-9">
-              <button type="submit" class="btn btn-primary login__submit-button">ログイン</button>
-              <button type="button" class="btn btn-default login__password-reset-button" data-toggle="modal" data-target="#passwordResetModal">パスワードを忘れた場合</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </section><!-- /#login -->
 
     <script src="js/vendor/jquery-2.2.4.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
