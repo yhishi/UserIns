@@ -25,14 +25,17 @@
 						<button type="button" class="btn btn-primary">検索</button>
 					</div>
 				</div>
-				<div class="col-sm-offset-1 col-sm-1">
-					<button type="submit" class="btn btn-primary login__submit-button">新規</button>
+				<div class="col-sm-1">
+					<button type="button" class="btn btn-primary login__submit-button">新規</button>
 				</div>
 				<div class="col-sm-1">
-					<button type="submit" class="btn btn-primary login__submit-button">更新</button>
+					<button type="button" class="btn btn-primary login__submit-button">更新</button>
 				</div>
 				<div class="col-sm-1">
-					<button type="submit" class="btn btn-primary login__submit-button">削除</button>
+					<button type="button" class="btn btn-primary login__submit-button">削除</button>
+				</div>
+				<div class="col-sm-1">
+					<button type="button" class="btn btn-primary login__submit-button">実行</button>
 				</div>
 			</div>
 		</div>
