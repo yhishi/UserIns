@@ -1,0 +1,5 @@
+[
+    {"email": "aaaa@example.com", "passwd": "xxxxxxxxxxx", "insdate": 20170728, "upddate": 20170729},
+    {"email": "bbbbbbb@gmail.com", "passwd": "yyy", "insdate": 20170518, "upddate": 20170619},
+    {"email": "cccccccc@ezweb.ne.jp", "passwd": "xxxxzzzzzz", "insdate": 20170213, "upddate": 20170923}
+]

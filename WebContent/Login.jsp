@@ -18,6 +18,7 @@
     </section>-->
 
     <!-- ログイン画面 -->
+    <br><br>
     <section id="login" class="view">
       <div class="container">
         <form id="login-form" class="form-horizontal">
@@ -35,7 +36,7 @@
             </div>
           </div>
 
-          <div class="col-sm-offset-3 col-sm-9 alert alert-danger login__help"></div>
+          <!--<div class="col-sm-offset-3 col-sm-9 alert alert-danger login__help">ああああああ</div> -->
           <div class="form-group login__submit">
             <div class="col-sm-offset-3 col-sm-9">
               <button type="submit" class="btn btn-primary login__submit-button">ログイン</button>
