@@ -41,7 +41,9 @@
 				<div class="col-sm-1">
 					<button type="button" class="btn btn-primary" id="submit">実行</button>
 				</div>
+				<div id="mode" class="alert alert-info col-sm-2">検索モード</div>
 			</div>
+
 		</div>
 	</section>
 	<!-- /#search-panel -->
@@ -49,7 +51,7 @@
 
 	<section id="meisai">
 		<div class="container">
-			<table class="table table-striped">
+			<table class="table table-striped" id="tbl">
 				<thead>
 					<tr>
 						<th></th>
