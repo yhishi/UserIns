@@ -76,26 +76,40 @@ $(document).ready(function() {
      ******************************/
     $("#submit").click(function(){
 
-      // チェックの入った行を取得
+      // 入力値格納用配列
       var checkval = [];
-      var email = "";
-      var passwd = "";
-      var insdate = "";
-      var upddate = "";
+      var email = [];
+      var passwd = [];
+      var insdate = [];
+      var upddate = [];
 
-//      JSONObject hishi = new JSONObject();
-//      hishi.setInt("age",21);
-
+      // 選択済み行のみ取得
       $('input[name="check"]:checked').each(function() {
+
         // value値を配列に格納
         checkval.push($(this).val());
-        // !!!!!!!emailが取得できない 8/6
-        email = $(this).parents('tbody').find('td').eq(2).val();
-//        $(this).parent().find('td').eq(2).each(function(){
-//          email = $(this).val();
-//        });
+
+        // 選択済み行の入力値を配列に格納      ※選択checkbox→td要素→input type=text
+        email.push($(this).parent().parent().find('td').eq(2).find("input").val());
+        passwd.push($(this).parent().parent().find('td').eq(3).find("input").val());
+        insdate.push($(this).parent().parent().find('td').eq(4).find("input").val());
+        upddate.push($(this).parent().parent().find('td').eq(5).find("input").val());
+
+
 
       });
+
+      $.ajax({
+              url: 'sample',
+              type: 'POST',
+              dataType: 'html',
+              data : {"email" : email, "passwd" : passwd }
+      }).done(function(data) {
+                        alert("ok");
+      }).fail(function(XMLHttpRequest, textStatus, errorThrown) {
+                       console.log("NG:" + textStatus);
+                       alert("error");
+      })
 
 
       // 入力チェック
