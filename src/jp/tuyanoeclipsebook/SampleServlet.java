@@ -43,6 +43,8 @@ public class SampleServlet extends HttpServlet {
 		String str = request.getParameter("text1");
 		String email = request.getParameter("email");
 		String passwd = request.getParameter("passwd");
+		String insdate = request.getParameter("insdate");
+		String upddate = request.getParameter("upddate");
 
 		out.println("<html><body>");
 		out.println("<h1>あなたは、「str:" + str + "  email:" + email + "  passwd:" +  passwd + "」と書きました。</h1>");
