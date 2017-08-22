@@ -10,7 +10,23 @@ $(document).ready(function() {
       $("#mode").text("検索モード");
 
       // 検索ボックスのメールアドレス取得
-      var mail = $.trim($("#login-email").val());
+      var email = $.trim($("#login-email").val());
+
+      $.ajax({
+        url: 'Search',
+        type: 'POST',
+        dataType: 'json', // レスポンスの データ形式
+        data : {'email' : email}
+
+      }).done(function(data) {
+                  alert("success");
+      }).fail(function(XMLHttpRequest, textStatus, errorThrown) {
+                 console.log("NG:" + textStatus);
+                 alert("error");
+      })
+
+      /***** ローカルJSONファイル読み込んで画面表示 start
+       *  2017/8/20 DBから読み込むように修正するため、コメントアウト
 
 	  // JSONファイルの読み込み
 	  $.getJSON("json/data.json", function(data){
@@ -52,8 +68,11 @@ $(document).ready(function() {
 		    });
 		}
 
+
+		** ローカルJSONファイル読み込んで画面表示 end */
+
 	  });
-	});
+	//});
 
 
     /*******************************
