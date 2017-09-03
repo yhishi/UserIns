@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.google.gson.Gson;
 
 /**
  * Servlet implementation class Search
@@ -53,48 +56,49 @@ public class Search extends HttpServlet {
 		// 検索m－ルアドレス取得
 		String inemail = request.getParameter("email");
 
-
-
-
 		Connection con = null;
         try {
 
             // JDBCドライバのロード - JDBC4.0（JDK1.6）以降は不要
             Class.forName("com.mysql.jdbc.Driver").newInstance();
+
             // MySQLに接続
-            con = DriverManager.getConnection("jdbc:mysql://localhost/hishitest", "root", "***");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/hishitest", "", "!");
             System.out.println("MySQLに接続できました。");
 
             Statement stm = con.createStatement();
-            String sql = "select * from userins";
+            String sql = "select * from userins where email like '" + inemail + "%'";
             ResultSet rs = stm.executeQuery(sql);
 
+            ArrayList<ArrayList<String>> dblist = new ArrayList<ArrayList <String>>();
+
             while(rs.next()){
-                String email = rs.getString("email");
-                String passwd = rs.getString("passwd");
-                int insdate = rs.getInt("insdate");
-                int upddate = rs.getInt("upddate");
+            	ArrayList<String> sub = new ArrayList<String>();
 
-                System.out.println("取得結果 -> email:" + email + " passwd:" + passwd + " insdate:" + insdate + " upddate:" + upddate);
+            	sub.add(rs.getString("email"));
+            	sub.add(rs.getString("passwd"));
+            	String insdate = String.valueOf(rs.getInt("insdate"));
+            	sub.add(insdate);
+            	String upddate = String.valueOf(rs.getInt("upddate"));
+            	sub.add(upddate);
+            	dblist.add(sub);
 
-                // JSONObjectにJSに返す
-                JSONObject result = new JSONObject();
-                result.put("email", email);
-                result.put("passwd", passwd);
-                result.put("insdate", insdate);
-                result.put("upddate", upddate);
-
+                System.out.println("取得結果 -> email:" + rs.getString("email") + " passwd:" + rs.getString("passwd") + " insdate:" + insdate + " upddate:" + upddate);
             }
+
+    		// Gsonオブジェクトを作成
+            Gson gson = new Gson();
+
+            // クライアントにDBからのデータリストを返す
+            PrintWriter out = response.getWriter();
+            out.println(gson.toJson(dblist));
 
 
         } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
             System.out.println("JDBCドライバのロードに失敗しました。");
         } catch (SQLException e) {
             System.out.println("MySQLに接続できませんでした。");
-        } catch (JSONException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		} finally {
+        } finally {
             if (con != null) {
                 try {
                     con.close();

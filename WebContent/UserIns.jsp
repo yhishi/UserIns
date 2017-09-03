@@ -67,11 +67,6 @@
 				</tbody>
   		</div>
 	</section>
-	<h1>フォームの送信</h1>
-	<form action="sample" method="POST">
-		入力:<input type="text" size="20" name="text1">
-		<input type="submit" value="送信">
-	</form>
 
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="js/vendor/moment.min.js"></script>

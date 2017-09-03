@@ -1,13 +1,14 @@
 $(document).ready(function() {
 
+	// モードはデフォルト検索
+	var mode = "search";
+	$("#mode").text("検索モード");
+
     /*******************************
     * 関数名 |
     * 概要   | 検索ボタンクリック時
     ******************************/
 	$("#search").click(function(){
-
-	  // モード変更
-      $("#mode").text("検索モード");
 
       // 検索ボックスのメールアドレス取得
       var email = $.trim($("#login-email").val());
@@ -20,6 +21,25 @@ $(document).ready(function() {
 
       }).done(function(data) {
                   alert("success");
+				  //要素削除
+				  $("#tb-meisai tr").remove();
+
+				  for(var i in data){
+					  var num = parseInt(i, 10) +1;
+					  // チェックブックスのvalue用
+					  var val = "val" + num
+					  // 画面表示
+					  $("#tb-meisai").append(
+				    	$("<tr>")
+				   		.append($("<td><input type=\"checkbox\" name=\"check\" value=" + val + "\></td>"))
+				   		.append($("<td>" + num + "</td>"))
+				   		.append($("<td>" + data[i][0] + "</td>"))
+				   		.append($("<td>" + data[i][1] + "</td>"))
+				   		.append($("<td>" + data[i][2] + "</td>"))
+				   		.append($("<td>" + data[i][3] + "</td></tr>\n"))
+				  	);
+				  }
+
       }).fail(function(XMLHttpRequest, textStatus, errorThrown) {
                  console.log("NG:" + textStatus);
                  alert("error");
@@ -67,12 +87,9 @@ $(document).ready(function() {
 		        })
 		    });
 		}
-
-
 		** ローカルJSONファイル読み込んで画面表示 end */
 
 	  });
-	//});
 
 
     /*******************************
@@ -83,11 +100,38 @@ $(document).ready(function() {
 
       // モード変更
       $("#mode").text("新規モード");
+      mode = "insert";
 
       // 新規行追加
       addrow();
 
-    })
+    });
+
+    /*******************************
+     * 関数名 |
+     * 概要   | 更新ボタンクリック時
+     ******************************/
+    $("#update").click(function(){
+
+      // モード変更
+      $("#mode").text("更新モード");
+      mode = "update";
+
+
+    });
+
+    /*******************************
+     * 関数名 |
+     * 概要   | 削除ボタンクリック時
+     ******************************/
+    $("#delete").click(function(){
+
+      // モード変更
+      $("#mode").text("削除モード");
+      mode = "delete";
+
+
+    });
 
      /*******************************
      * 関数名 |
