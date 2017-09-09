@@ -39,7 +39,8 @@ public class SampleServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.setContentType("text/html;charset=UTF-8");
+		//response.setContentType("text/html;charset=UTF-8");
+		response.setContentType("application/json;charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String str = request.getParameter("text1");
@@ -48,9 +49,20 @@ public class SampleServlet extends HttpServlet {
 		String insdate = request.getParameter("insdate");
 		String upddate = request.getParameter("upddate");
 
-		out.println("<html><body>");
-		out.println("<h1>あなたは、「str:" + str + "  email:" + email + "  passwd:" +  passwd + "」と書きました。</h1>");
-		out.println("</html></body>");
+		String name = request.getParameter("name");
+		String age = request.getParameter("age");
+
+
+
+	    String vals[] = request.getParameterValues("email");
+	    if (vals != null){
+	      for (int i = 0 ; i < vals.length ; i++){
+	        out.println(vals[i]);
+	        System.out.println(vals[i]);;
+	      }
+	    }
+
+	    // JSのJSONが取得できないーー9/9
 
 		// MySQl接続
 		MysqlConnect Mysql = new MysqlConnect();
