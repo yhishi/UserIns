@@ -63,7 +63,7 @@ public class Search extends HttpServlet {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
 
             // MySQLに接続
-            con = DriverManager.getConnection("jdbc:mysql://localhost/hishitest", "", "!");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/hishitest", "r", "!");
             System.out.println("MySQLに接続できました。");
 
             Statement stm = con.createStatement();
@@ -93,6 +93,8 @@ public class Search extends HttpServlet {
             PrintWriter out = response.getWriter();
             out.println(gson.toJson(dblist));
 
+            rs.close();
+  	        stm.close();
 
         } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
             System.out.println("JDBCドライバのロードに失敗しました。");

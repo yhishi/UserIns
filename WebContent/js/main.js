@@ -139,91 +139,70 @@ $(document).ready(function() {
      ******************************/
     $("#submit").click(function(){
 
-      // 入力値格納用配列
-//      var array = [2][4];
-//      array[0][0] = "aaaaa@yahoo";
-//      array[0][1] = "pass";
-//      array[0][2] = "1111";
-//      array[0][3] = "22222";
-//      array[1][0] = "bbb@co.jp";
-//      array[1][1] = "passwd";
-//      array[1][2] = "date";
-//      array[1][3] = "9999";
-
-//	  var data =[
-//		  	{ 'name': "山田", 'age': 21 },
-//		  	{ 'name': "佐藤", 'age': 56 },
-//		  	{ 'name': "鈴木", 'age': "33" }
-//	      ]
-//	      ;
-
 	  var insdata = [];
+	  var checkval = [];
 
-
-      var checkval = [];
-//      var email = [];
-//      var passwd = [];
-//      var insdate = [];
-//      var upddate = [];
-
-
-
-
+      var email = "";
+      var passwd = "";
+      var insdate = "";
+      var upddate = "";
 
       // 選択済み行のみ取得
       $('input[name="check"]:checked').each(function() {
 
-    	  // value値を配列に格納
-    	  checkval.push($(this).val());
+    	// value値を配列に格納
+    	checkval.push($(this).val());
 
-          var email = "";
-          var passwd = "";
-          var insdate = "";
-          var upddate = "";
-
-    	  // 選択済み行の入力値を配列に格納      ※選択checkbox→td要素→input type=text
-
-    	  // !!!!!!2017/8/19 リストで送る方法がよくわからないので、とりあえず一行のみ送る　あとでやる！
-//    	  email.push($(this).parent().parent().find('td').eq(2).find("input").val());
-//    	  passwd.push($(this).parent().parent().find('td').eq(3).find("input").val());
-//    	  insdate.push($(this).parent().parent().find('td').eq(4).find("input").val());
-//    	  upddate.push($(this).parent().parent().find('td').eq(5).find("input").val());
-
+    	// 選択済み行の入力値を配列に格納      ※選択checkbox→td要素→input type=text
         email = ($(this).parent().parent().find('td').eq(2).find("input").val());
         passwd = ($(this).parent().parent().find('td').eq(3).find("input").val());
         insdate = ($(this).parent().parent().find('td').eq(4).find("input").val());
         upddate = ($(this).parent().parent().find('td').eq(5).find("input").val());
 
         insdata.push({ 'email': email, 'passwd': passwd, 'insdate': insdate , 'upddate': upddate });
-
-
-
-
       });
 
 
-      var insdbdata = [
-    	   { 'email': "OKKKKK.yahoo.co.jp", 'passwd': "pass", 'insdate': "2017" , 'upddate': "1111" },
-    	   { 'email': "hsihi@.com", 'passwd': "passwd1", 'insdate': "2018" , 'upddate': "2222" },
-    	   { 'email': "kkkkkk@gameil.com", 'passwd': "passwd11", 'insdate': "2019" , 'upddate': "3333" }
-    	 ];
+	  // formでPostで送信
+	  var form = document.createElement('form');
+	  form.action = 'sample';
+      form.method = 'POST';
+	  document.body.appendChild(form);
 
+	  // パラメータ設定
+	  if (insdata !== undefined) {
+	    var input = document.createElement('input');
+	    input.setAttribute('type', 'hidden');
+	    input.setAttribute('name', 'input');
+	    input.setAttribute('value', JSON.stringify(insdata));
+	    form.appendChild(input);
+	  }
 
-      $.ajax({
-              url: 'sample',
-              type: 'POST',
-              dataType: 'json', // レスポンスの データ形式なので記載不要？
-              //contentType: 'application/json',
-        	  data : JSON.stringify(insdbdata)
-              //data : insdata,
-        	  //traditional: true
-//              data : {'name' : "鈴木", 'age': 33 }
-      }).done(function(data) {
-                        alert("success");
-      }).fail(function(XMLHttpRequest, textStatus, errorThrown) {
-                       console.log("NG:" + textStatus);
-                       alert("error");
-      })
+	  form.submit();
+
+      //連想配列をobjectに変換
+//	  var test_obj = {};
+//	  for(key in insdata){
+//		test_obj [key] = insdata[key];
+//	  }
+
+//      $.ajax({
+//              url: 'sample',
+//              type: 'POST',
+//              dataType: 'json', // レスポンスの データ形式なので記載不要？
+//              //contentType: 'application/json',
+//        	  //data : JSON.stringify(insdata)
+//        	  //data: JSON.stringify(test_obj)
+//        	  //data: JSON.stringify({'test_obj': test_obj})
+//        	  data: {'email': email, 'passwd': passwd, 'insdate': insdate , 'upddate': upddate}
+//        	  //traditional: true
+//              //data : {'name' : "鈴木", 'age': 33 }
+//      }).done(function(data) {
+//                        alert("success");
+//      }).fail(function(XMLHttpRequest, textStatus, errorThrown) {
+//                       console.log("NG:" + textStatus);
+//                       alert("error");
+//      })
 
 
       // 入力チェック
